@@ -117,6 +117,9 @@ int main(int argc, char **argv) {
             if(res < 0) {
                 perror("read");
                 continue;
+            } else if (res == 0) {
+                printf("client closed tcp connection.\n");
+                break;
             }
 
             buf[0][res] = '\0';
@@ -126,9 +129,11 @@ int main(int argc, char **argv) {
             sprintf(buf[1], "%d bytes received\n", res);
             write(sockfd[1], buf[1], strlen(buf[1]));
 
+            #if 0
             if(!strcmp(buf[0], "quit")) {
                 break;
             }
+            #endif
         }
 
         if(close(sockfd[1]) == -1) {

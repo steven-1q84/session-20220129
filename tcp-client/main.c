@@ -92,10 +92,24 @@ int main(int argc, char **argv) {
         printf("\n");
 
         /* 发送消息 */
-        write(client_sockfd, buf[0], strlen(buf[0]));
+        if(
+            write(client_sockfd, buf[0], strlen(buf[0]))
+            == -1 
+        ){
+            perror("write");
+            continue;
+        }
 
         /* 接收消息 */
         int res = read(client_sockfd, buf[1], sizeof(buf[1]) - 1);
+        if(res == -1) {
+            perror("read");
+            continue;
+        } else if (res == 0) {
+            printf("server closed tcp connection.\n");
+            break;
+        }
+
         buf[1][res] = '\0';
 
         printf("server replied: %s\n", buf[1]);

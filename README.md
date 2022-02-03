@@ -344,3 +344,25 @@ int socket(int domain, int type, int protocal);
   > 
   
   
+
+## 4. 用于网络连接诊断的常用指令
+
+### 4.1. TCP
+
+- netstat -nat | grep <端口号>
+
+  > 查看端口号对应的tcp连接状态
+  >
+  > 
+
+- tcpdump -iany tcp port <端口号>
+
+  > 对端口号的tcp连接进行抓包
+  >
+  > 
+
+- lsof -i:<端口号>
+
+  > 查看端口号的TCP连接
+  >
+  > 
