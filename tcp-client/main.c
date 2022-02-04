@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
     while(1) {
         printf("input your words here:");
         scanf("%s", buf[0]);
-        printf("\n");
+        //printf("\n");
 
         /* 发送消息 */
         if(
