@@ -120,14 +120,20 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    /*
-     *  获取服务端IP和端口号
-     *  - 将第一个入口参数按点分十进制的格式转换为服务端IP变量
-     *  - 将第二个入口参数转换为整形数，赋给端口号变量
-     *  */
-    inet_aton(argv[1], p_ip_s);
-    *p_port_s = atoi(argv[2]);
-    //printf("server_addr: %s:%d\n", inet_ntoa(*p_ip_s), *p_port_s);
+    /*  判断入口参数个数 */
+    if(3 < argc) {
+        /*
+         *  获取服务端IP和端口号
+         *  - 将第一个入口参数按点分十进制的格式转换为服务端IP变量
+         *  - 将第二个入口参数转换为整形数，赋给端口号变量
+         *  */
+        inet_aton(argv[1], p_ip_s);
+        *p_port_s = atoi(argv[2]);
+        //printf("server_addr: %s:%d\n", inet_ntoa(*p_ip_s), *p_port_s);
+    } else {
+        printf("failed to create TCP server: not enough parameters.\n");
+        exit(1);
+    }
 
     /*
      *  初始化服务器地址结构体
